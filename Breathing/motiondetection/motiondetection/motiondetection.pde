@@ -1,9 +1,3 @@
-// Learning Processing
-// Daniel Shiffman
-// http://www.learningprocessing.com
-
-// Example 16-14: Overall motion
-
 import processing.video.*;
 
 // Variable for capture device
