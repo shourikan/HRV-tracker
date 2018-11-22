@@ -8,17 +8,31 @@ import processing.video.*;
 
 // Variable for capture device
 Movie movie;
+
+//FrameRate
+int fps = 25;
+float dur;
+float at;
+boolean done = false;
+boolean saved = false;
+boolean first = true;
+
+//Output
+ArrayList<String> list = new ArrayList<String>();
+String fileName = "out.txt";
+
 // Previous Frame
 PImage prevFrame;
 
 // How different must a pixel be to be a "motion" pixel
-float threshold = 60;
+float threshold = 40;
 
 
 void setup() {
   size(1440, 1080);
-  movie = new Movie(this, "test1.mov"); 
-  movie.loop();
+  movie = new Movie(this, "test1.mov");
+  movie.play();
+  dur = movie.duration();
 }
 
 void movieEvent(Movie movie) {
@@ -27,6 +41,7 @@ void movieEvent(Movie movie) {
     // Create an empty image the same size as the video
     prevFrame = createImage(movie.width, movie.height, RGB);
   }
+  
   prevFrame.copy(movie, 0, 0, movie.width, movie.height, 0, 0, movie.width, movie.height);
   prevFrame.updatePixels();
   movie.read();
@@ -34,6 +49,11 @@ void movieEvent(Movie movie) {
 
 void draw() {
   background(0);
+  
+  at = movie.time();
+  if(at >= dur){
+    done = true;
+  }
 
   // You don't need to display it to analyze it!
   image(movie, 0, 0);
@@ -72,11 +92,30 @@ void draw() {
   }
 
   // averageMotion is total motion divided by the number of pixels analyzed.
-  float avgMotion = totalMotion / movie.pixels.length; 
+  float avgMotion = totalMotion / movie.pixels.length * fps;
+  
+  //Save to file
+  if(done && !saved){
+    list.add(Float.toString(movie.time())+","+Float.toString(avgMotion));
+    saveStrings(fileName, list.toArray(new String[list.size()]));
+    saved = true;
+  }else if(!first)
+    list.add(Float.toString(movie.time())+","+Float.toString(avgMotion));
+  else{
+    list.add("Time,Motion");
+    first = false;
+  }
 
   // Draw a circle based on average motion
   stroke(204, 102, 0);
   fill(204, 102, 0);
-  float r = avgMotion * 100;
+  float r = avgMotion * 5;
   ellipse(width/2, height/2, r, r);
+  
+  textSize(100);
+  fill(0, 102, 153);
+  text(avgMotion, 10, 100);
+  text("Done: "+String.valueOf(done), 20, 200);
+  text(movie.time(), 10, 300);
+  text(movie.duration(), 10, 400);
 }
