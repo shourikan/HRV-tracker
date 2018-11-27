@@ -1,6 +1,7 @@
 const int buttonPin = 2;
 const int fsrPin = 0;
 const int irPin = 1;
+const int ledPin = 7;
 
 int buttonState = 0;
 int maxSize = 8;
@@ -16,6 +17,7 @@ boolean first = true;
 
 void setup() {
   pinMode(buttonPin, INPUT);
+  pinMode(ledPin, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -39,6 +41,15 @@ void loop() {
     switched = false;
   }
 
+  //LED
+  if(on)
+    digitalWrite(ledPin, HIGH);
+  else
+    digitalWrite(ledPin, LOW);
+
+  //Test sensor
+  //Serial.println(fsr);
+  
   //Send to Saving Script
   if(done && !saved){
     //Serial.print(fsr);
