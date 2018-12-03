@@ -8,6 +8,8 @@ int maxSize = 8;
 int stackSize = 0;
 float stackFsr = 0;
 float stackIr = 0;
+float prevFsr = 0;
+float threshold = 0;
 
 boolean on = false;
 boolean done = false;
@@ -58,19 +60,25 @@ void loop() {
   }else if(!first && on){
     //Stacking
     if(stackSize < maxSize){
-      stackIr += ir;
-      stackFsr += fsr;
+      /*stackIr += ir;
+      stackFsr += fsr;*/
       stackSize ++;
     }else{
-      Serial.print(stackFsr/maxSize);
+      Serial.print(fsr);
       Serial.print(",");
-      Serial.println(stackIr/maxSize);
-      stackIr = 0;
-      stackFsr = 0;
+      Serial.println(ir);
+      /*float diff = sqrt(pow(stackFsr - prevFsr, 2));
+      if (diff > threshold) {
+        Serial.println(diff);
+      }
+      prevFsr = stackFsr;*/
+      
+      /*stackIr = 0;
+      stackFsr = 0;*/
       stackSize = 0;
       
-      stackIr += ir;
-      stackFsr += fsr;
+      /*stackIr += ir;
+      stackFsr += fsr;*/
     }
     
   }

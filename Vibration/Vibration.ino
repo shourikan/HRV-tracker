@@ -9,16 +9,17 @@ void loop() {
   analogWrite(pin, 150);
   delay(3000);
   //Pause
-  analogWrite(pin, 85);
+  analogWrite(pin, 0);
   delay(3000);
   //Exhale
-  for(int i = 0; i<6; i++){
+  analogWrite(pin, 80);
+  /*for(int i = 0; i<6; i++){
     analogWrite(pin, 0);
     delay(250);
     analogWrite(pin, 150);
     delay(250);
-  }
+  }*/
   //Pause
-  analogWrite(pin, 85);
+  analogWrite(pin, 0);
   delay(3000);
 }
