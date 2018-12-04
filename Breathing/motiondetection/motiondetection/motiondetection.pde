@@ -24,7 +24,8 @@ float threshold = 40;
 
 void setup() {
   size(1440, 1080);
-  movie = new Movie(this, "test1.mov");
+  movie = new Movie(this, "1-belt.mp4");
+  movie.speed(6.0);
   movie.play();
   dur = movie.duration();
 }
@@ -50,7 +51,7 @@ void draw() {
   }
 
   // You don't need to display it to analyze it!
-  image(movie, 0, 0);
+  //image(movie, 0, 0);
 
   movie.loadPixels();
   prevFrame.loadPixels();

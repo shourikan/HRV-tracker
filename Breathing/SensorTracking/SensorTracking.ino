@@ -15,7 +15,7 @@ boolean on = false;
 boolean done = false;
 boolean switched = false;
 boolean saved = false;
-boolean first = true;
+boolean first =        true;
 
 void setup() {
   pinMode(buttonPin, INPUT);
