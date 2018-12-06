@@ -13,7 +13,14 @@ PVector GetCenterOfMotion(PImage a){
       float g1 = green(current);
       float b1 = blue(current);
       
-      if((r1>190 && r1<220) && (g1>190 && g1<220) && (b1>190 && b1<220)){
+      //White
+      /*if((r1>190 && r1<220) && (g1>190 && g1<220) && (b1>190 && b1<220)){
+        centerOfMotion.add((i+1)%a.width, (i+1)/a.width+1);
+        motionPixels ++;
+      }*/
+      
+      //Green
+      if((r1>40 && r1<80) && (g1>110 && g1<200) && (b1>40 && b1<80) && (dist(r1, 0, b1, 0)< 20)){
         centerOfMotion.add((i+1)%a.width, (i+1)/a.width+1);
         motionPixels ++;
       }

@@ -14,7 +14,9 @@ boolean first = true;
 
 //Output
 ArrayList<String> list = new ArrayList<String>();
-String fileName = "out.txt";
+String n = "5";
+String fileName = n+".txt";
+String movFile = n+"-belt.mp4";
 
 // How different must a pixel be to be a "motion" pixel
 float threshold = 0;
@@ -26,8 +28,8 @@ PVector centerOfMotionPrev = new PVector(0,0);
 
 void setup() {
   size(1440, 1080);
-  movie = new Movie(this, "1-belt.mp4");
-  //movie.speed(6.0);
+  movie = new Movie(this, movFile);
+  movie.speed(6.0);
   movie.play();
   dur = movie.duration();
 }
