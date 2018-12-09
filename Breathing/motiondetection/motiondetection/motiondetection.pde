@@ -1,3 +1,5 @@
+//Tracking of a green color across the footage resulting in Y-coordinate value
+
 import processing.video.*;
 
 // Variable for capture device
@@ -14,7 +16,7 @@ boolean first = true;
 
 //Output
 ArrayList<String> list = new ArrayList<String>();
-String n = "5";
+String n = "17";
 String fileName = n+".txt";
 String movFile = n+"-belt.mp4";
 
@@ -29,24 +31,24 @@ PVector centerOfMotionPrev = new PVector(0,0);
 void setup() {
   size(1440, 1080);
   movie = new Movie(this, movFile);
-  movie.speed(6.0);
+  //movie.speed(0.5);
   movie.play();
   dur = movie.duration();
 }
 
 void movieEvent(Movie movie) {
-  if(prevFrame==null){
+  /*if(prevFrame==null){
     movie.read();
     // Create an empty image the same size as the video
     prevFrame = createImage(movie.width, movie.height, RGB);
   }
   prevFrame.copy(movie, 0, 0, movie.width, movie.height, 0, 0, movie.width, movie.height);
-  prevFrame.updatePixels();
+  prevFrame.updatePixels();*/
   movie.read();
 }
 
 void draw() {
-  background(0);
+ background(0);
   
   at = movie.time();
   if(at >= dur){
@@ -56,13 +58,15 @@ void draw() {
   // You don't need to display it to analyze it!
   image(movie, 0, 0);
   
-  centerOfMotionPrev = GetCenterOfMotion(prevFrame);
+  //centerOfMotionPrev = GetCenterOfMotion(prevFrame);
   PVector centerOfMotion = GetCenterOfMotion(movie);
-  PVector direction = new PVector(centerOfMotion.x-centerOfMotionPrev.x, centerOfMotion.y-centerOfMotionPrev.y);
-  float totalMotion = direction.mag();
+  //PVector direction = (centerOfMotionPrev.mag()>0) ? new PVector(centerOfMotion.x-centerOfMotionPrev.x, centerOfMotion.y-centerOfMotionPrev.y) : ;
+  //float totalMotion = direction.mag();
+  //float totalMotion = (centerOfMotionPrev.mag()>0) ? abs(centerOfMotion.y-centerOfMotionPrev.y) : 0;
+  //centerOfMotionPrev = centerOfMotion;
 
-  // averageMotion is total motion divided by the number of pixels analyzed.
-  float avgMotion = (totalMotion * fps);
+  //Scaled
+  //float avgMotion = (totalMotion * fps);
   //avgMotion = (avgMotion>1.5) ? avgMotion : 0;
   
   //Save to file
@@ -82,14 +86,15 @@ void draw() {
 
   //Draw a circle based on average motion
   stroke(204, 102, 0);
-  fill(204, 102, 0);
+  //fill(204, 102, 0);
   //float r = 100;
   //ellipse(centerOfMotion.x, centerOfMotion.y, r, r);
   line(0, centerOfMotion.y, movie.width, centerOfMotion.y);
   
   textSize(100);
   fill(0, 102, 153);
-  text(avgMotion, 10, 100);
+  //text(avgMotion, 10, 100);
+  text(centerOfMotion.y, 10, 100);
   text("Done: "+String.valueOf(done), 20, 200);
   text(movie.time(), 10, 300);
   text(movie.duration(), 10, 400);

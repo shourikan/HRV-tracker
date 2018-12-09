@@ -20,7 +20,10 @@ PVector GetCenterOfMotion(PImage a){
       }*/
       
       //Green
-      if((r1>40 && r1<80) && (g1>110 && g1<200) && (b1>40 && b1<80) && (dist(r1, 0, b1, 0)< 20)){
+      //General&Light (LED on only restricted)
+      if((r1>10 && r1<80) && (g1>70 && g1<180) && (b1>10 && b1<80) && (dist(r1, 0, b1, 0)< 20) && (dist(r1, 0, g1, 0)> 50)){
+      //Dark (LED off included)
+      //if((r1>10 && r1<25) && (g1>40 && g1<70) && (b1>10 && b1<25) && (dist(r1, 0, b1, 0)< 20) && (dist(r1, 0, g1, 0)> 25)){
         centerOfMotion.add((i+1)%a.width, (i+1)/a.width+1);
         motionPixels ++;
       }
