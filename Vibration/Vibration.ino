@@ -1,31 +1,34 @@
-
+const int ledPin = 7;
+const int buttonPin = 2;
 int pin = 3;
+int buttonState = 0;
+boolean on = false;
+boolean switched = false;
+
 void setup() {
   pinMode(pin, OUTPUT);
+  pinMode(buttonPin, INPUT);
+  pinMode(ledPin, OUTPUT);
   Serial.begin(9600);  
 }
 
 void loop() {
-  Serial.print("1 ");
-  //Inhale
-  analogWrite(pin, 150);
-  delay(3000);
-  //Pause
-  Serial.print("2 ");
-  analogWrite(pin, 0);
-  delay(3000);
-  //Exhale
-  Serial.print("3 ");
-  analogWrite(pin, 80);
-  delay(3000);
-  /*for(int i = 0; i<6; i++){
-    analogWrite(pin, 0);
-    delay(250);
-    analogWrite(pin, 150);
-    delay(250);
-  }*/
-  //Pause
-  Serial.println("4");
-  analogWrite(pin, 0);
-  delay(3000);
+  delay(10);
+  buttonState = digitalRead(buttonPin);
+
+  //Button
+  if (buttonState == HIGH && !switched) {
+    on = !on;
+    switched = true;
+  } else if(buttonState == LOW){
+    switched = false;
+  }
+
+  //LED
+  if(on){
+    digitalWrite(ledPin, HIGH);
+    Vibrate();
+  }
+  else
+    digitalWrite(ledPin, LOW);
 }
