@@ -54,31 +54,17 @@ void loop() {
   
   //Send to Saving Script
   if(done && !saved){
-    //Serial.print(fsr);
     Serial.println("done");
     saved = true;
   }else if(!first && on){
     //Stacking
     if(stackSize < maxSize){
-      /*stackIr += ir;
-      stackFsr += fsr;*/
       stackSize ++;
     }else{
       Serial.print(fsr);
       Serial.print(",");
       Serial.println(ir);
-      /*float diff = sqrt(pow(stackFsr - prevFsr, 2));
-      if (diff > threshold) {
-        Serial.println(diff);
-      }
-      prevFsr = stackFsr;*/
-      
-      /*stackIr = 0;
-      stackFsr = 0;*/
       stackSize = 0;
-      
-      /*stackIr += ir;
-      stackFsr += fsr;*/
     }
     
   }

@@ -6,7 +6,7 @@ PVector GetCenterOfMotion(PImage a){
     //println(a.pixels.length);
     a.loadPixels();
     
-    for (int i = 0; i < a.pixels.length; i ++ ) {
+    for (int i = a.pixels.length/3; i < a.pixels.length; i ++ ) {
       color current = a.pixels[i];
           
       float r1 = red(current); 
@@ -14,8 +14,13 @@ PVector GetCenterOfMotion(PImage a){
       float b1 = blue(current);
       
       //White
-      /*if((r1>190 && r1<220) && (g1>190 && g1<220) && (b1>190 && b1<220)){
-        centerOfMotion.add((i+1)%a.width, (i+1)/a.width+1);
+      //if((r1>190 && r1<220) && (g1>190 && g1<220) && (b1>190 && b1<220)){
+      //if((r1>180 && r1<200) && (g1>180 && g1<200) && (b1>165 && b1<185)){
+      //if((r1>80 && r1<120) && (g1>80 && g1<120) && (b1>80 && b1<120)){
+      //if((r1>90 && r1<120) && (g1>90 && g1<120) && (b1>70 && b1<100)){
+      //if((r1>70 && r1<120) && (g1>70 && g1<120) && (b1>70 && b1<120)){
+      //if((r1>65 && r1<90) && (g1>65 && g1<90) && (b1>50 && b1<75)){
+        /*centerOfMotion.add((i+1)%a.width, (i+1)/a.width+1);
         motionPixels ++;
       }*/
       

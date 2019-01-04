@@ -16,9 +16,9 @@ boolean first = true;
 
 //Output
 ArrayList<String> list = new ArrayList<String>();
-String n = "22";
+String n = "23";
 String fileName = n+".txt";
-String movFile = n+"-belt.mp4";
+String movFile = "\\c\\"+n+"-anim.mp4";
 
 // How different must a pixel be to be a "motion" pixel
 float threshold = 0;
@@ -80,7 +80,7 @@ void draw() {
     prevTime = movie.time();
   }
   else{
-    list.add("Time,Motion");
+    //list.add("Time,Motion");
     first = false;
   }
 
